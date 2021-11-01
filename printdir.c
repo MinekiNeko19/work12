@@ -6,14 +6,21 @@
 #include <time.h>
 
 int main() {
+    // printing the meta data
+    
+    struct stat sb;
+    stat(".", &sb);
+
+    printf("Total Directory Size: %lu bytes\n", sb.st_size);
+
+    // listing the items
     DIR *d;
     struct dirent *dp;
 
     d = opendir("./");
     dp = readdir(d);
 
-    // printf("Total Directory Size: %d bytes\n", );
-    printf("files in this folder:\n");
+    printf("In this directory:\n");
     while(dp) {
         printf("\t%s\n",dp->d_name);
         dp = readdir(d);
