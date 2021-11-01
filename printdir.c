@@ -7,7 +7,6 @@
 
 int main() {
     // printing the meta data
-    
     struct stat sb;
     stat(".", &sb);
 
@@ -21,6 +20,12 @@ int main() {
     dp = readdir(d);
 
     printf("In this directory:\n");
+    printf("Directories:\n");
+    while(dp && dp->d_type == DT_DIR) {
+        printf("\t%s\n",dp->d_name);
+        dp = readdir(d);
+    }
+    printf("Normal files:\n");
     while(dp) {
         printf("\t%s\n",dp->d_name);
         dp = readdir(d);
