@@ -10,6 +10,7 @@ int main() {
     struct stat sb;
     stat(".", &sb);
 
+    printf("Statistics for directory: .\n");
     printf("Total Directory Size: %lu bytes\n", sb.st_size);
 
     // listing the items
