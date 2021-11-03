@@ -5,19 +5,18 @@
 #include <stdio.h>
 #include <time.h>
 
-int main() {
+int main(int argc, char *argv[]) {
     // printing the meta data
     struct stat sb;
-    stat(".", &sb);
-
-    printf("Statistics for directory: .\n");
+    stat(argv[1], &sb);
+    printf("Statistics for directory: %s\n", argv[1]);
     printf("Total Directory Size: %lu bytes\n", sb.st_size);
 
     // listing the items
     DIR *d;
     struct dirent *dp;
 
-    d = opendir("./");
+    d = opendir(argv[1]);
     dp = readdir(d);
 
     printf("In this directory:\n");
