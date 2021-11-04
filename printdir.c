@@ -8,10 +8,12 @@
 #include <errno.h>
 
 int main(int argc, char *argv[]) {
+    printf("argc: %d argv[0]: %s argv[1]: %s\n", argc, argv[0], argv[1]);
+
     // getting input
     char buffer[100];
-    if (!argv[1]) printf("Please enter a directory: ");
-    read(STDIN_FILENO,buffer, sizeof(buffer));
+    read(STDIN_FILENO,buffer, 1);
+    // if (buffer==NULL) printf("Please enter a directory: ");
 
     // printing the meta data
     struct stat sb;
