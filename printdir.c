@@ -12,23 +12,30 @@ int main(int argc, char *argv[]) {
 
     // getting input
     char buffer[100];
-    read(STDIN_FILENO,buffer, 1);
-    // if (buffer==NULL) printf("Please enter a directory: ");
+    char input[100];
+    int i = 0;
+    read(STDIN_FILENO, buffer, 100);
+    printf("buffer: %s\n",buffer);
+    while(buffer[i] != 0) {
+        i++;
+    }
+    strncpy(input,buffer,i-1);
+
 
     // printing the meta data
-    struct stat sb;
-    stat(buffer, &sb);
-    if (sb.st_mode == 0) {
+    if (errno) {
         printf("directory %s not found\nerror %d: %s\n", buffer, errno, strerror(errno));
     } else {
-    printf("Statistics for directory: %s\n",buffer);
+    struct stat sb;
+    stat(input, &sb);
+    printf("Statistics for directory: %s\n",input);
     printf("Total Directory Size: %lu bytes\n", sb.st_size);
 
     // listing the items
     DIR *d;
     struct dirent *dp;
 
-    d = opendir(buffer);
+    d = opendir(input);
     dp = readdir(d);
 
     printf("In this directory:\n");
